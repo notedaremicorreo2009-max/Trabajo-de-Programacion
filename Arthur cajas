@@ -1,0 +1,77 @@
+ef menu():
+    print("="*55+"|")
+    print("====Tienda_de_Cajas====")
+    print("1) Cajas normal (contienen nada)------------ $2.99 |")
+    print("2) Cajas bombas (contienen bombas pelota)--- $14.99|")
+    print("3) Cajas bombas (contienen C4)-------------- $89.99|")
+    print("4) Cajas negras (contienen pintura negra)--- $19.99|")
+    print("5) Cajas metal  (vacía y ni se abre)-------- $49.99|")
+    print("6) Cajas².......(cajas dentro de cajas)----- $34.99|")
+    print("7) Cajas³.......(cajas dentro de cajas)----- $79.99|")
+    print("8) Salir-------------------------------------------|")
+    print("="*55+"|")
+    print("OFERTA ESPECIAL")
+    print("Si usted compra mas de 3 cajas obtienes un 15% de descuento")
+    print("="*55)
+
+
+def valor_de_cuenta(a):
+    if a == 1:
+        return 2.99
+    elif a == 2:
+        return 14.99
+    elif a == 3:
+        return 89.99
+    elif a == 4:
+        return 19.99
+    elif a == 5:
+        return 49.99
+    elif a == 6:
+        return 34.99
+    elif a == 7:
+        return 79.99
+    else:
+        return 0.00
+
+
+def descuento(n):
+    desc = (n*15)/100
+    return desc
+
+
+total = 0.00
+cantidad_cajas = 0
+
+while True:
+    menu()
+    try:
+       selec = int(input("ingrese la CAJA que quieres comprar o 8 para salir: "))
+
+       if selec == 8:
+            break
+       
+       elif selec in [1,2,3,4,5,6,7]:
+            total += valor_de_cuenta(selec)
+            cantidad_cajas += 1
+
+    except ValueError:
+        print("porfavor eliga una CAJA")
+        continue
+
+
+if cantidad_cajas >= 3:
+    desc = descuento(total)
+    total -= desc
+    print("aplicaste el descuento del 15%")
+
+
+# Función con **datos (**kwargs)
+def mostrar_factura(**datos):
+    print("="*30)
+    print(f"Nombre del comprador: {datos['nombre']}")
+    print(f"su factura final fue: ${datos['total']:.2f}")
+    print("="*30)
+
+
+nombre = input("ingrese su nombre:")
+mostrar_factura(nombre=nombre, total=total)
